@@ -168,6 +168,7 @@ if(isset($_POST['updateProduct'])){
     $productPrice = $_POST['pPrice'];
     $productQty = $_POST['pQty'];
     $productId = $_GET['productId'];
+    $categoryId = $_POST['categoryId'];
     if(empty($productName)){
         $productNameErr = "name is required";
 
@@ -188,7 +189,7 @@ if(isset($_POST['updateProduct'])){
 
     }   
 
-    $query = $pdo->prepare("update products set name = :pName , description = :pDes , price = :pPrice , qty = :pQty where id = :pId ");
+    $query = $pdo->prepare("update products set name = :pName , description = :pDes , price = :pPrice , qty = :pQty , c_id = :cId where id = :pId ");
     if(!empty($_FILES['pImage']['name'])){
         $productImageName = $_FILES['pImage']['name'];
         $productImageTmpName = $_FILES['pImage']['tmp_name'];
@@ -197,7 +198,7 @@ if(isset($_POST['updateProduct'])){
         $format = ["jpg" , "png" , "jpeg" , "webp"];
         if(in_array($extension,$format)){
             if(move_uploaded_file($productImageTmpName,$destination)){
-                $query = $pdo->prepare("update products set name = :pName , description = :pDes , price = :pPrice , qty = :pQty image = :pImage where id = :pId ");
+                $query = $pdo->prepare("update products set name = :pName , description = :pDes , price = :pPrice , qty = :pQty ,  c_id = :cId , image = :pImage where id = :pId ");
                 $query->bindParam('pImage',$productImageName);
             }
 
@@ -213,6 +214,7 @@ if(isset($_POST['updateProduct'])){
     $query->bindParam('pPrice',$productPrice);
     $query->bindParam('pQty',$productQty);
     $query->bindParam('pId',$productId);
+    $query->bindParam('cId',$categoryId);
     $query->execute();
 
 
