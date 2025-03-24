@@ -131,29 +131,29 @@ include("components/header.php");
 
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 						All Products
 					</button>
+					<?php
+					$query = $pdo->query("select * from categories");
+					$allCategories = $query->fetchAll(PDO::FETCH_ASSOC);
+					foreach($allCategories as $category){
+						?>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
+						
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".
+						<?php echo $category['id']?>">
+						<?php echo $category['name']?>
+						
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
-					</button>
+					<?php
+					}
+					?>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
-					</button>
+					
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -372,6 +372,7 @@ include("components/header.php");
 			</div>
 
 			<div class="row isotope-grid">
+				
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
@@ -883,6 +884,11 @@ include("components/header.php");
 						</div>
 					</div>
 				</div>
+
+
+
+
+
 			</div>
 
 			<!-- Load more -->
