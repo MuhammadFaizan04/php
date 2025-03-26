@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2025 at 07:11 AM
+-- Generation Time: Mar 26, 2025 at 10:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  `image` varchar(150) NOT NULL
+  `description` varchar(150) NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -39,8 +39,16 @@ CREATE TABLE `categories` (
 --
 -- Table structure for table `products`
 --
--- Error reading structure for table faizan.products: #1932 - Table &#039;faizan.products&#039; doesn&#039;t exist in engine
--- Error reading data for table faizan.products: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `faizan`.`products`&#039; at line 1
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `image` varchar(150) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `price` int(100) NOT NULL,
+  `qty` int(200) NOT NULL,
+  `c_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -72,20 +80,18 @@ CREATE TABLE `users` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `role_id` int(11) NOT NULL DEFAULT 2
+  `r_id` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role_id`) VALUES
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `r_id`) VALUES
 (1, 'admin', 'admin@gmail.com', '123', 1),
-(2, 'faizan', 'faizan@gmail.com', '123', 2),
-(3, 'hassan', 'hassan@gmail.com', '12345', 2),
-(4, 'hamza', 'hamza@gmail.com', '12345', 2),
-(5, 'faizan', 'faizan12@gmail.com', '123', 2),
-(6, 'hassan', 'hassan123@gmail.com', '123', 2);
+(2, 'ali', 'ali@gmail.com', '123', 2),
+(3, 'ali', 'ali12@gmail.com', '123', 2),
+(4, 'faizan', 'faizan@gmail.com', '1234567', 2);
 
 --
 -- Indexes for dumped tables
@@ -98,6 +104,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `c_id` (`c_id`);
+
+--
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -108,7 +121,7 @@ ALTER TABLE `role`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `role_id` (`role_id`);
+  ADD KEY `r_id` (`r_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -118,6 +131,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -130,17 +149,23 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `categories` (`id`);
+
+--
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `role` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
