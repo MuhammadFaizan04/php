@@ -1,5 +1,5 @@
 <?php
-$server = "mysql:host=localhost;dbname=faizan";
+$server = "mysql:host=localhost;dbname=faizan2";
 $user = "root";
 $password = "";
 $pdo = new PDO($server, $user, $password);
