@@ -30,7 +30,7 @@ if(isset($_GET['remove'])){
 		if($value['productId'] == $productId){
 			unset($_SESSION['cart'][$key]);
 			$_SESSION['cart'] = array_values($_SESSION['cart']);
-			echo "<script>alert('product remove successfully')</script>";
+			echo "<script>alert('product remove successfully');location.assign('shoping-cart.php')</script>";
 
 		}
 
@@ -98,8 +98,8 @@ if(isset($_GET['remove'])){
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$ 16.00</td>
-									<td class="column-5" class="btn btn-danger"><a href="?remove=<?php echo $value['productId']?>">Remove</a></td>
+									<td class="column-5">$<?php echo $value['productQty']*$value['productPrice']?></td>
+									<td class="column-6"><a href="?remove=<?php echo $value['productId']?>" class="btn btn-danger">Remove</a></td>
 								</tr>
 								<?php
 								}
