@@ -2,6 +2,10 @@
 <?php
 include("php/query.php");
 include("components/header.php");
+if(!isset($_SESSION['adminEmail'])){
+    echo "<script>location.assign('../login.php')</script>"; 
+}
+
 ?>
             <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
@@ -20,8 +24,8 @@ include("components/header.php");
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Product Image</label>
                                 <input name="pImage" class="form-control" type="file" id="formFile">
-                              
-                                <small  class="text-danger"><?php  echo $productImageNameErr?></small>
+                             
+                                <small  class="text-danger"><?php echo $productImageNameErr?></small>
                             </div>
                           
                             <div class="form-floating mb-3">
@@ -32,15 +36,15 @@ include("components/header.php");
                             </div>
                             <div class="form-floating mb-3">
                                 <input value="<?php echo $productPrice?>" name="pPrice" type="text" class="form-control" id="floatingInput"
-                                    placeholder="Enter Product Name">
+                                    placeholder="Enter Product Price">
                                 <label for="floatingInput">Product Price</label>
-                                <small class="text-danger"><?php echo $productPriceErr?></small>
+                                <small class="text-danger"><?php // echo $categoryNameErr?></small>
                             </div>
                             <div class="form-floating mb-3">
                                 <input value="<?php echo $productQty?>" name="pQty" type="text" class="form-control" id="floatingInput"
-                                    placeholder="Enter Product Name">
+                                    placeholder="Enter Product Quantity">
                                 <label for="floatingInput">Product Quantity</label>
-                                <small class="text-danger"><?php  echo $productQtyErr?></small>
+                                <small class="text-danger"><?php // echo $categoryNameErr?></small>
                             </div>
                             <div class="form-floating mb-3">
                               <div class="form-group">

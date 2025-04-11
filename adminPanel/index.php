@@ -1,5 +1,10 @@
 <?php
+include("php/query.php");
 include("components/header.php");
+if(!isset($_SESSION['adminEmail'])){
+    echo "<script>location.assign('../login.php')</script>"; 
+}
+
 ?>
 
 
@@ -269,7 +274,6 @@ include("components/header.php");
             <!-- Widgets End -->
 
 
-            <?php
-include("components/footer.php");
-?>
-            
+         <?php
+         include("components/footer.php");
+         ?>

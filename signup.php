@@ -1,5 +1,5 @@
 <?php
-include("query.php")
+include("php/query.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,10 @@ include("query.php")
     <div class="container p-5 mt-5">
         <form action="" method="post">
             <div class="form-group">
-             
+              <label for="">Name</label>
+              <input type="text" value="<?php echo $userName?>" name="uName" id="" class="form-control" placeholder="" aria-describedby="helpId">
+              <small id="helpId" class="text-danger"><?php echo $userNameErr?></small>
+            </div>
 
             <div class="form-group">
               <label for="">Email</label>
@@ -27,7 +30,13 @@ include("query.php")
               <small id="helpId" class="text-danger"><?php echo $userPasswordErr?></small>
             </div>
 
-            <button name="userLogin" class="btn btn-info">Login</button>
+            <div class="form-group">
+              <label for="">Confirm Password</label>
+              <input type="text" value="<?php echo $userConfirmPassword?>" name="uConfirmPassword" id="" class="form-control" placeholder="" aria-describedby="helpId">
+              <small id="helpId" class="text-danger"><?php echo $userConfirmPasswordErr?></small>
+            </div>
+
+            <button name="registerUser" class="btn btn-info">Register</button>
         </form>
     </div>
     

@@ -68,7 +68,6 @@
                             <!-- <a href="element.php" class="dropdown-item">Other Elements</a> -->
                         </div>
                     </div>
-
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Products</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -77,12 +76,12 @@
                             <!-- <a href="element.php" class="dropdown-item">Other Elements</a> -->
                         </div>
                     </div>
-
-                    <a href="widget.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Orders</a>
-                    <a href="form.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Invoices</a>
-                    <a href="table.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Reviews</a>
+                  
+                    <a href="chart.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Orders</a>
+                    <a href="chart.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Invoices</a>
+                    <a href="chart.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Reviews</a>
                     <a href="chart.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Feedback</a>
-                    
+                   
                 </div>
             </nav>
         </div>
@@ -174,7 +173,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="logout.php" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>
