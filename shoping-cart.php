@@ -49,6 +49,44 @@ if(isset($_POST['qtyIncDec'])){
 	}
 
 }
+
+// checkout work
+
+if(isset($_POST['checkout'])){
+	$uId = $_SESSION['userId'];
+	$uName = $_SESSION['userName'];
+	$uEmail = $_SESSION['userEmail'];
+	foreach($_SESSION['cart'] as $key => $value){
+			$pId = $value['productId'];
+			$pName = $value['productName'];
+			$pPrice = $value['productPrice'];
+			$pQty= $value['productQty'];
+			$query = $pdo->prepare("insert into orders (u_id ,u_name , u_email , p_id ,p_name , p_price , p_qty) values (:u_id ,:u_name , :u_email , :p_id ,:p_name , :p_price , :p_qty)");
+			$query->bindParam('u_id',$uId);
+			$query->bindParam('u_name',$uName);
+			$query->bindParam('u_email',$uEmail);
+			$query->bindParam('p_id',$pId);
+			$query->bindParam('p_name',$pName);
+			$query->bindParam('p_price',$pPrice);
+			$query->bindParam('p_qty',$pQty);
+			$query->execute();
+	}
+	$totalQty = 0 ; 
+	$totalPrice = 0 ;
+	foreach($_SESSION['cart'] as $value){
+		$totalPrice += $value['productPrice']*$value['productQty'];
+		$totalQty += $value['productQty'];
+	}
+	$invoiceQuery = $pdo->prepare("insert into invoices (u_id ,u_name , u_email ,  total_price , total_qty) values (:u_id ,:u_name , :u_email ,  :t_price , :t_qty)");
+	$invoiceQuery->bindParam('u_id',$uId);
+	$invoiceQuery->bindParam('u_name',$uName);
+	$invoiceQuery->bindParam('u_email',$uEmail);
+	$invoiceQuery->bindParam('t_price',$totalPrice);
+	$invoiceQuery->bindParam('t_qty',$totalQty);
+	$invoiceQuery->execute();
+	echo "<script>alert('order added');location.assign('index.php')</script>";
+	unset($_SESSION['cart']);		
+}
 ?>
 	<!-- breadcrumb -->
 	<div class="container mt-5">
@@ -66,7 +104,10 @@ if(isset($_POST['qtyIncDec'])){
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<?php
+	if(isset($_SESSION['cart'])){
+	?>
+	<form method="post" class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -215,14 +256,38 @@ if(isset($_POST['qtyIncDec'])){
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+						<?php
+									if(isset($_SESSION['userEmail'])){
+									?>
+
+						<button name="checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
 						</button>
+
+						<?php
+						}
+						else{
+							?>
+							<a href="login.php" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							Proceed to Checkout
+						</a>
+							<?php
+						}
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+
+	<?php
+	}
+	else{
+		?>
+		<h1 class="px-4 py-5" >Your Cart is Empty</h1>
+		<?php
+	}
+		?>
 		
 	
 		

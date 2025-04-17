@@ -53,13 +53,29 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
+						<?php
+						if(isset($_SESSION['userEmail'])){
+							?>
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
+							<?php echo $_SESSION['userName']?>
 						</a>
+						<a href="logout.php" class="flex-c-m p-lr-10 trans-04">
+							Logout
+						</a>
+
+						<?php
+						}else
+						{
+						?>
+
+						<a href="login.php" class="flex-c-m trans-04 p-lr-25">
+						Login
+						</a>
+						<?php
+						}
+						?>
+
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
@@ -116,7 +132,13 @@
 							<i class="zmdi zmdi-search"></i>
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="<?php
+						$count = 0 ;
+						if(isset($_SESSION['cart'])){
+							$count = count($_SESSION['cart']);
+						}
+						echo $count ;
+						?>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
